@@ -1,379 +1,137 @@
 <!DOCTYPE html>
-<html lang="id" class="light">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Monitoring - LMS SMANJO</title>
+    <title>Login & Beranda - LMS SMANJO</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
-                    colors: { primary: '#4F46E5', secondary: '#10B981', dark: '#0F172A' }
-                }
-            }
-        }
-    </script>
     <style>
-        body {
-            background-color: #f8fafc;
-            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,0.05) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,0.05) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,0.05) 0, transparent 50%);
-            background-attachment: fixed;
+        body { 
+            background-color: #f8fafc; 
+            background-image: radial-gradient(circle at 50% 0%, #ffffff 0%, #f1f5f9 100%); 
+            color: #334155; 
+            min-height: 100vh; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
         }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        .glass-panel { 
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(226, 232, 240, 0.8); 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); 
         }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        .spinner { animation: spin 1s linear infinite; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .modern-input {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: #1e293b;
+            transition: all 0.2s ease-in-out;
+        }
+        .modern-input:focus {
+            outline: none;
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+<body class="flex flex-col min-h-screen justify-between p-4 md:p-8">
 
-    <!-- LOGIN VIEW -->
-    <div id="view-login" class="flex-grow flex items-center justify-center p-6">
-        <div class="glass-panel w-full max-w-md rounded-3xl p-8 transform transition-all">
-            <div class="text-center mb-8">
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-primary to-indigo-400 mx-auto flex items-center justify-center text-white font-bold text-3xl shadow-lg shadow-indigo-200 mb-4">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                </div>
-                <h1 class="text-2xl font-bold text-slate-800">LMS SMANJO</h1>
-                <p class="text-sm text-slate-500 mt-1">Sistem Pemantauan Akademik</p>
-            </div>
-            
-            <form id="login-form" onsubmit="handleLogin(event)">
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Email</label>
-                    <input type="email" id="login-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white/50" placeholder="user@smanjo.sch.id">
-                </div>
-                <div class="mb-6">
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
-                    <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white/50" placeholder="••••••••">
-                </div>
-                <button type="submit" id="btn-login" class="w-full bg-primary hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-indigo-200 flex justify-center items-center">
-                    <span>Masuk Dashboard</span>
-                </button>
-                <div id="login-error" class="mt-4 text-sm text-rose-500 text-center hidden"></div>
-            </form>
+    <!-- Top Navigation / Shortcut Monitoring -->
+    <header class="w-full max-w-5xl mx-auto flex justify-between items-center glass-panel rounded-2xl p-4 mb-6">
+        <div class="flex items-center gap-3">
+            <div class="bg-sky-500 text-white font-black px-3 py-1.5 rounded-xl text-sm shadow-sm">SMANJO</div>
+            <span class="font-bold text-slate-800 text-sm hidden sm:inline">Learning Management System</span>
         </div>
-    </div>
+        <div>
+            <a href="dashboard-monitoring.html" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 font-bold text-xs sm:text-sm px-4 py-2 rounded-xl transition-colors shadow-2xs flex items-center gap-2">
+                <span>📊</span> Dashboard Monitoring (Kepsek / Kurikulum)
+            </a>
+        </div>
+    </header>
 
-    <!-- MAIN APP CONTENT -->
-    <div id="app-container" class="hidden flex-col min-h-screen">
-        <nav class="glass-panel sticky top-0 z-50 px-6 py-4 flex justify-between items-center transition-all duration-300">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-indigo-400 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-200">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-indigo-600 leading-tight">LMS SMANJO</h1>
-                    <p class="text-xs text-slate-500 font-medium tracking-wide uppercase" id="role-display">Monitoring Dashboard</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-4">
-                <span class="text-sm font-medium text-slate-600 hidden md:block">Halo, <span id="user-name-display" class="font-bold text-primary">Pengguna</span></span>
-                <button onclick="logout()" class="w-10 h-10 rounded-full bg-white shadow-sm border border-slate-200 flex items-center justify-center text-rose-500 hover:bg-rose-50 transition" title="Keluar">
-                    <i class="fa-solid fa-power-off"></i>
-                </button>
-            </div>
-        </nav>
+    <!-- Main Container Login -->
+    <main class="w-full max-w-md mx-auto glass-panel rounded-3xl p-8 shadow-xl my-auto">
+        <div class="text-center mb-6">
+            <h1 class="text-2xl font-black text-slate-800 tracking-tight">Selamat Datang 👋</h1>
+            <p class="text-xs text-slate-500 mt-1">Silakan masuk menggunakan akun LMS SMANJO Anda.</p>
+        </div>
 
-        <main class="flex-grow container mx-auto px-6 py-8">
-            
-            <!-- View: Class List -->
-            <div id="view-class-list" class="block animate-fade-in">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4">
-                    <div>
-                        <h2 class="text-2xl font-bold text-slate-800">Daftar Kelas</h2>
-                        <p class="text-sm text-slate-500 mt-1">Pantau perkembangan materi dan progres tugas siswa secara realtime.</p>
-                    </div>
-                    <div class="flex flex-wrap gap-2 w-full md:w-auto">
-                        <!-- Dropdown khusus Kepala Sekolah -->
-                        <select id="teacher-selector" class="hidden bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-medium focus:outline-none focus:border-primary shadow-sm" onchange="loadClasses()">
-                            <option value="">-- Pilih Guru Dipantau --</option>
-                        </select>
-                        <button onclick="loadClasses()" class="bg-white border border-slate-200 text-slate-600 hover:text-primary hover:border-primary px-4 py-2 rounded-xl text-sm font-medium transition shadow-sm flex items-center">
-                            <i class="fa-solid fa-rotate-right mr-2" id="sync-icon"></i> Refresh
-                        </button>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="class-grid"></div>
+        <form id="formLogin" onsubmit="prosesLogin(event)" class="space-y-4">
+            <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Email</label>
+                <input type="email" id="email" required class="w-full rounded-xl px-4 py-2.5 modern-input text-sm" placeholder="nama@email.com">
             </div>
 
-            <!-- View: Class Detail -->
-            <div id="view-class-detail" class="hidden animate-fade-in">
-                <button onclick="backToClasses()" class="mb-6 flex items-center text-sm font-medium text-slate-500 hover:text-primary transition group">
-                    <div class="w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center mr-3 group-hover:bg-indigo-50">
-                        <i class="fa-solid fa-arrow-left"></i>
-                    </div>
-                    Kembali ke Daftar Kelas
-                </button>
-
-                <div class="glass-panel rounded-3xl p-8 mb-8 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-indigo-100 to-transparent rounded-bl-full opacity-50 -z-10"></div>
-                    <div>
-                        <h2 class="text-3xl font-bold text-slate-800 mb-2" id="detail-class-name">Nama Kelas</h2>
-                        <div class="flex items-center gap-4 text-sm text-slate-600 font-medium">
-                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-user-tie text-primary"></i> <span id="detail-teacher-name">Nama Guru</span></span>
-                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-hashtag text-secondary"></i> <span id="detail-class-code">KODE</span></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex border-b border-slate-200 mb-6">
-                    <button class="px-6 py-3 border-b-2 border-primary text-primary font-semibold text-sm transition" id="tab-btn-materi" onclick="switchTab('materi')">Materi Pembelajaran</button>
-                    <button class="px-6 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-700 font-medium text-sm transition" id="tab-btn-tugas" onclick="switchTab('tugas')">Progres & Tugas Siswa</button>
-                </div>
-
-                <div id="tab-materi" class="block"><div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="materi-list"></div></div>
-
-                <div id="tab-tugas" class="hidden">
-                    <div class="glass-panel rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse">
-                                <thead>
-                                    <tr class="bg-slate-50/50 text-slate-500 text-xs uppercase tracking-wider font-semibold">
-                                        <th class="p-4 border-b border-slate-100">Nama Siswa</th>
-                                        <th class="p-4 border-b border-slate-100">Tugas</th>
-                                        <th class="p-4 border-b border-slate-100">Status</th>
-                                        <th class="p-4 border-b border-slate-100">Nilai & Catatan Guru</th>
-                                        <th class="p-4 border-b border-slate-100">Indikasi AI</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-sm text-slate-700 divide-y divide-slate-50" id="submission-list"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
+            <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Password</label>
+                <input type="password" id="password" required class="w-full rounded-xl px-4 py-2.5 modern-input text-sm" placeholder="••••••••">
             </div>
-        </main>
-    </div>
 
-    <!-- MAIN JAVASCRIPT -->
+            <button type="submit" id="btnLogin" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 rounded-xl transition-colors shadow-md text-sm cursor-pointer mt-2">
+                Masuk ke Sistem
+            </button>
+        </form>
+
+        <div class="text-center mt-6 pt-4 border-t border-slate-100">
+            <p class="text-xs text-slate-500">Belum punya akun? <a href="register.html" class="text-sky-600 font-bold hover:underline">Daftar di sini</a></p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-5xl mx-auto text-center text-xs text-slate-400 py-4">
+        &copy; 2026 SMAN 1 Wongsorejo (SMANJO). All rights reserved.
+    </footer>
+
     <script>
-        const API_URL = 'https://script.google.com/macros/s/AKfycbyTICgF-NqTCpCw3A38R_wgxJ9AZZiXB9Y1yYaGG81LtyaRRUG95qBimEZ_5snTYoxj/exec';
-        let currentUser = null; 
-        let activeTeacherName = "";
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyTICgF-NqTCpCw3A38R_wgxJ9AZZiXB9Y1yYaGG81LtyaRRUG95qBimEZ_5snTYoxj/exec';
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const savedUser = localStorage.getItem('smanjo_user');
-            if(savedUser) {
-                currentUser = JSON.parse(savedUser);
-                showApp();
+        window.onload = function() {
+            // Jika sudah login, langsung arahkan ke dashboard masing-masing
+            if (localStorage.getItem('lms_user')) {
+                const user = JSON.parse(localStorage.getItem('lms_user'));
+                if (user.role === 'Guru') window.location.href = 'dashboard-guru.html';
+                else if (user.role === 'Siswa') window.location.href = 'dashboard-siswa.html';
+                else if (user.role === 'Kepala Sekolah') window.location.href = 'dashboard-monitoring.html';
             }
-        });
+        };
 
-        async function fetchGAS(action, payload) {
+        async function prosesLogin(event) {
+            event.preventDefault();
+            const btn = document.getElementById('btnLogin');
+            btn.disabled = true;
+            btn.innerText = 'Memproses...';
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
             try {
-                const response = await fetch(API_URL, {
+                const res = await fetch(scriptURL, {
                     method: 'POST',
-                    body: JSON.stringify({ action: action, ...payload })
+                    body: JSON.stringify({ action: 'login', email: email, password: password })
                 });
-                return await response.json();
-            } catch (error) {
-                return { status: 'error', message: 'Koneksi ke server gagal.' };
-            }
-        }
+                const result = await res.json();
 
-        async function handleLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            const btn = document.getElementById('btn-login');
-            const errorDiv = document.getElementById('login-error');
-            
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch spinner mr-2"></i> Memproses...';
-            btn.disabled = true; errorDiv.classList.add('hidden');
-
-            const res = await fetchGAS('login', { email, password });
-            btn.innerHTML = 'Masuk Dashboard'; btn.disabled = false;
-
-            if(res && res.status === 'success') {
-                currentUser = res.data;
-                localStorage.setItem('smanjo_user', JSON.stringify(currentUser));
-                showApp();
-            } else {
-                errorDiv.innerText = res ? res.message : 'Terjadi kesalahan sistem.';
-                errorDiv.classList.remove('hidden');
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem('smanjo_user'); currentUser = null;
-            document.getElementById('app-container').classList.replace('flex', 'hidden');
-            document.getElementById('view-login').classList.replace('hidden', 'flex');
-            document.getElementById('login-form').reset();
-        }
-
-        async function showApp() {
-            document.getElementById('view-login').classList.replace('flex', 'hidden');
-            document.getElementById('app-container').classList.replace('hidden', 'flex');
-            document.getElementById('user-name-display').innerText = currentUser.nama_lengkap;
-            document.getElementById('role-display').innerText = currentUser.role || 'Dashboard';
-            
-            const selector = document.getElementById('teacher-selector');
-            if(currentUser.role === 'Kepala Sekolah' || currentUser.role === 'Admin') {
-                selector.classList.remove('hidden');
-                selector.innerHTML = '<option value="">Memuat data guru...</option>';
-                const res = await fetchGAS('get_all_teachers', {});
-                if(res && res.status === 'success') {
-                    selector.innerHTML = '<option value="">-- Pilih Guru Dipantau --</option>';
-                    res.data.forEach(guru => {
-                        selector.innerHTML += `<option value="${guru.user_id}">${guru.nama_lengkap}</option>`;
-                    });
+                if (result.status === 'success') {
+                    localStorage.setItem('lms_user', JSON.stringify(result.data));
+                    
+                    if (result.data.role === 'Guru') {
+                        window.location.href = 'dashboard-guru.html';
+                    } else if (result.data.role === 'Siswa') {
+                        window.location.href = 'dashboard-siswa.html';
+                    } else if (result.data.role === 'Kepala Sekolah') {
+                        window.location.href = 'dashboard-monitoring.html';
+                    } else {
+                        window.location.href = 'dashboard-siswa.html';
+                    }
+                } else {
+                    alert(`Login Gagal: ${result.message}`);
+                    btn.disabled = false;
+                    btn.innerText = 'Masuk ke Sistem';
                 }
-            } else {
-                selector.classList.add('hidden');
+            } catch (err) {
+                console.error(err);
+                alert("Terjadi kesalahan jaringan.");
+                btn.disabled = false;
+                btn.innerText = 'Masuk ke Sistem';
             }
-            loadClasses();
-        }
-
-        async function loadClasses() {
-            const grid = document.getElementById('class-grid');
-            const icon = document.getElementById('sync-icon');
-            const selector = document.getElementById('teacher-selector');
-            
-            let targetTeacherId = currentUser.user_id;
-            activeTeacherName = currentUser.nama_lengkap;
-
-            if((currentUser.role === 'Kepala Sekolah' || currentUser.role === 'Admin') && selector.value !== "") {
-                targetTeacherId = selector.value;
-                activeTeacherName = selector.options[selector.selectedIndex].text;
-            }
-
-            icon.classList.add('spinner');
-            grid.innerHTML = '<div class="col-span-full text-center py-12 text-slate-500"><i class="fa-solid fa-circle-notch fa-spin fa-2x mb-3 text-primary"></i><p>Menarik data kelas...</p></div>';
-            
-            const res = await fetchGAS('get_teacher_classes', { teacher_id: targetTeacherId }); 
-            icon.classList.remove('spinner');
-
-            if (res && res.status === 'success') {
-                if (res.data.length > 0) renderClasses(res.data);
-                else {
-                    grid.innerHTML = `<div class="col-span-full glass-panel p-8 text-center rounded-3xl text-slate-500">
-                        <i class="fa-solid fa-folder-open text-4xl text-slate-300 mb-3"></i><br>
-                        Belum ada kelas yang dibuat oleh ${activeTeacherName}.
-                    </div>`;
-                }
-            } else {
-                grid.innerHTML = `<div class="col-span-full text-center text-rose-500 py-4">Gagal memuat kelas.</div>`;
-            }
-        }
-
-        function renderClasses(classes) {
-            const grid = document.getElementById('class-grid');
-            grid.innerHTML = '';
-            
-            classes.forEach(cls => {
-                const card = document.createElement('div');
-                card.className = "glass-panel rounded-3xl p-6 cursor-pointer transform hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(79,70,229,0.15)] transition duration-300 group border border-white/50 relative overflow-hidden";
-                card.onclick = () => openClassDetail(cls.class_id, cls.nama_kelas, cls.kode_kelas);
-                card.innerHTML = `
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full -z-10 transition-all group-hover:scale-110"></div>
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-primary flex items-center justify-center text-xl group-hover:bg-primary group-hover:text-white transition-colors"><i class="fa-solid fa-chalkboard-user"></i></div>
-                        <span class="bg-emerald-50 text-emerald-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide border border-emerald-100">${cls.kode_kelas}</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-800 mb-1 group-hover:text-primary transition-colors">${cls.nama_kelas}</h3>
-                    <div class="flex items-center text-sm text-slate-500 font-medium mt-4 pt-4 border-t border-slate-100">
-                        <i class="fa-solid fa-user-tie mr-2 text-slate-400"></i> ${activeTeacherName}
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        async function openClassDetail(classId, className, classCode) {
-            document.getElementById('view-class-list').classList.add('hidden');
-            document.getElementById('view-class-detail').classList.remove('hidden');
-            document.getElementById('detail-class-name').innerText = className;
-            document.getElementById('detail-class-code').innerText = classCode;
-            document.getElementById('detail-teacher-name').innerText = activeTeacherName;
-
-            document.getElementById('materi-list').innerHTML = '<div class="col-span-full text-center text-sm text-slate-500 py-10"><i class="fa-solid fa-circle-notch fa-spin mr-2"></i>Memuat materi...</div>';
-            document.getElementById('submission-list').innerHTML = '<tr><td colspan="5" class="p-10 text-center text-slate-500 text-sm"><i class="fa-solid fa-circle-notch fa-spin mr-2"></i>Memuat data progres...</td></tr>';
-            
-            const res = await fetchGAS('get_teacher_room_data', { class_id: classId });
-            if(res && res.status === 'success') {
-                renderMateri(res.materials); renderTugas(res.assignments, res.submissions);
-            }
-        }
-
-        function renderMateri(materials) {
-            const container = document.getElementById('materi-list'); container.innerHTML = '';
-            if(!materials || materials.length === 0) {
-                container.innerHTML = '<div class="col-span-full glass-panel p-8 rounded-3xl text-center text-slate-500 border border-dashed border-slate-300">Belum ada materi diposting.</div>'; return;
-            }
-            materials.forEach(mat => {
-                const date = new Date(mat.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-                container.innerHTML += `
-                    <div class="glass-panel p-5 rounded-2xl border border-slate-100 hover:border-primary/30 transition shadow-sm">
-                        <div class="flex gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-500 flex-shrink-0 flex items-center justify-center text-lg"><i class="fa-solid fa-book-open"></i></div>
-                            <div>
-                                <h4 class="font-bold text-slate-800 text-base leading-tight">${mat.judul_materi}</h4>
-                                <p class="text-xs text-slate-400 mt-1 mb-2"><i class="fa-regular fa-calendar mr-1"></i> ${date}</p>
-                                <p class="text-sm text-slate-600 line-clamp-2">${mat.deskripsi || '-'}</p>
-                            </div>
-                        </div>
-                    </div>`;
-            });
-        }
-
-        function renderTugas(assignments, submissions) {
-            const container = document.getElementById('submission-list'); container.innerHTML = '';
-            if(!assignments || assignments.length === 0) {
-                container.innerHTML = '<tr><td colspan="5" class="p-10 text-center text-slate-500 text-sm border-b">Belum ada penugasan.</td></tr>'; return;
-            }
-            const assignMap = {}; assignments.forEach(a => assignMap[a.assignment_id] = a.judul_tugas);
-            if(!submissions || submissions.length === 0) {
-                 container.innerHTML = '<tr><td colspan="5" class="p-10 text-center text-slate-500 text-sm border-b">Belum ada data pengumpulan tugas.</td></tr>'; return;
-            }
-            submissions.forEach(sub => {
-                const judul = assignMap[sub.assignment_id] || 'Tugas';
-                const statusStyle = (sub.file_url || sub.submitted_text || sub.status === 'Sudah Mengumpulkan') ? "bg-emerald-50 text-emerald-600 border-emerald-200" : "bg-rose-50 text-rose-600 border-rose-200";
-                const statusIcon = (sub.file_url || sub.submitted_text || sub.status === 'Sudah Mengumpulkan') ? '<i class="fa-solid fa-check-circle mr-1"></i> Selesai' : '<i class="fa-solid fa-clock mr-1"></i> Belum';
-                
-                const nilaiDisplay = (sub.nilai === '-' || sub.nilai === 'Belum Dinilai' || sub.nilai === '') ? '<span class="text-slate-400 italic text-xs">Belum dinilai</span>' : `<span class="font-bold text-primary text-base">${sub.nilai}</span>`;
-                
-                const feedbackDisplay = (sub.feedback && sub.feedback.trim() !== "") 
-                    ? `<div class="text-xs text-slate-600 mt-1 bg-indigo-50/50 p-2 rounded-lg border border-indigo-100"><i class="fa-solid fa-comment-dots text-primary mr-1"></i> ${sub.feedback}</div>` 
-                    : `<span class="text-slate-400 italic text-xs">-</span>`;
-
-                const aiBadge = (sub.flag_status === 'Indikasi AI / Salin' || sub.flag_status === 'Terdeteksi Instan') ? `<span class="px-2 py-1 rounded-lg bg-orange-50 text-orange-600 border border-orange-200 text-xs font-semibold flex w-max items-center gap-1"><i class="fa-solid fa-robot"></i> ${sub.flag_status}</span>` : `<span class="px-2 py-1 rounded-lg bg-slate-50 text-slate-500 border border-slate-200 text-xs font-medium w-max inline-block">Aman</span>`;
-                
-                container.innerHTML += `
-                    <tr class="hover:bg-slate-50/50 transition group align-top">
-                        <td class="p-4 font-medium text-slate-800 border-b border-slate-100">${sub.student_name || 'Siswa'}</td>
-                        <td class="p-4 text-slate-600 border-b border-slate-100">${judul}</td>
-                        <td class="p-4 border-b border-slate-100"><span class="px-3 py-1 rounded-full border text-xs font-semibold ${statusStyle}">${statusIcon}</span></td>
-                        <td class="p-4 border-b border-slate-100">
-                            <div>${nilaiDisplay}</div>
-                            <div class="mt-1">${feedbackDisplay}</div>
-                        </td>
-                        <td class="p-4 border-b border-slate-100">${aiBadge}</td>
-                    </tr>`;
-            });
-        }
-
-        function backToClasses() { document.getElementById('view-class-detail').classList.add('hidden'); document.getElementById('view-class-list').classList.remove('hidden'); switchTab('materi'); }
-        function switchTab(tabName) {
-            document.getElementById('tab-btn-materi').className = tabName === 'materi' ? "px-6 py-3 border-b-2 border-primary text-primary font-semibold text-sm transition" : "px-6 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-700 font-medium text-sm transition";
-            document.getElementById('tab-btn-tugas').className = tabName === 'tugas' ? "px-6 py-3 border-b-2 border-primary text-primary font-semibold text-sm transition" : "px-6 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-700 font-medium text-sm transition";
-            document.getElementById('tab-materi').classList.toggle('hidden', tabName !== 'materi');
-            document.getElementById('tab-tugas').classList.toggle('hidden', tabName !== 'tugas');
         }
     </script>
 </body>
